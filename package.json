@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JimmyJoo/Momentum_project.git"
+    "url": "git+https://github.com/wgy5446/Momentum_project.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JimmyJoo/Momentum_project/issues"
+    "url": "https://github.com/wgy5446/Momentum_project/issues"
   },
-  "homepage": "https://github.com/JimmyJoo/Momentum_project#readme",
+  "homepage": "https://github.com/wgy5446/Momentum_project#readme",
   "dependencies": {
     "@babel/polyfill": "^7.8.7",
     "cors": "^2.8.5",
