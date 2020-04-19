@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/todo.css">
+  <script src="js/bundle.js" defer></script>
+  <title>Will</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="grid">
+      <!-- Search -->
+      <div class="search-sec">
+        <i class="icon-search"></i>
+        <!-- <form class="search" method="get" action="https://www.youtube.com/results?search_query=" target="_self" >   
+         <input class="search-area" type="text" name="q" size="25" maxlength="255" value="" /> 
+         <input class="btn-submit" type="submit" name="btnG" value="youtube" /> 
+       </form>  -->
+      </div>
+      <!-- Nothing -->
+      <div calss="nothing">
+      </div>
+      <!-- Weather -->
+      <div class="weather-sec">
+        <i class="icon-clouds"></i>
+      </div>
+      <!-- Nothing -->
+      <div calss="nothing">
+      </div>
+      <!-- Clock & Todo -->
+      <div class="main-sec">
+        <div class="todo-focus">
+          <h3>What is your main focus?</h3>
+          <input type="text"  class="input-todo" autocomplete="off">
+        </div>
+        <!-- <ul class="todo-list">
+          <li class="todo">Todo</li><span></span>
+          <li id="myId" class="todo-item">
+            <input id="ck-myid" class="check icon-check-empty" type="checkbox">
+            <label for="ck-myid">Css</label>
+            <i class="btn-todo icon-cancel"></i>
+          </li>
+        </ul> -->
+        <div class="todo">Todo<span class="icon-plus icon-plus-circled"></span></div>
+       <ul class="todo-list">
+        <li id="myId" class="todo-item">
+          <input id="ck-myid" class="check icon-check-empty icon-check" type="checkbox">
+          <label for="ck-myid">HTML</label>
+          <i class="btn-todo icon-cancel icon-cancel-circled"></i>
+        </li>
+        </ul>
+      </div>
+      <!-- Nothing -->
+      <div calss="nothing">
+      </div>
+      <!-- Setting -->
+      <div class="setting-sec">
+        <i class="icon-cog"></i>
+      </div>
+      <!-- Quote -->
+      <div class="quote-sec">
+      </div>
+      <!-- TodoList -->
+      <div class="todolist-sec">
+        <h1></h1>
+          <header class="todo-header">
+        <div class="active-list-container">
+        <span class="list-row active-todo-list">today</span>
+        <i class="icon-wrapper icon-angle-down"></i>
+        </div>
+        <ul class="todo-list-dropdown">
+        <li id="all" class="active">today</li>
+        <li id="active">Active</li>
+        <li id="completed">Completed</li>
+        </ul>
+        </header>
+        <section class="todo-list-section">
+        <ul class="todo-list">
+        <li id="myId" class="todo-item">
+        <input id="ck-myid" type="checkbox" class="icon-check-empty icon-check">
+        <label for="ck-myid">HTML</label>
+        <i class="btn-todo icon-cancel"></i>
+        </li>
+        </ul>
+        </section>
+        <!-- <i class="icon-th-list-1"></i> -->
+      </div>
+        <i class="icon-th-list-1"></i>
+    </div>
+  </div>
+</body>
+
+</html>
