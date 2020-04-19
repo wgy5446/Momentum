@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import './reset.css';
+@import './fontello.css';
+* {
+  box-sizing: border-box;
+}
+body {
+  font-size: 10px;
+  font-family: 'Manrope';
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.container {
+  /* background-image: url(../asset/images/bailey-zindel-NRQV-hBF10M-unsplash.jpg); */
+  /* background-image: url(../asset/images/alex-king-Pa0AqyCLeec-unsplash.jpg); */
+  /* background-image: url(../asset/images/mountain-4021090_1920.jpg); */
+  background-image: url(../asset/images/waterfall-5028130.jpg);
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+}
+.fade-in {
+  display: block;
+  animation-name: fade-in-ani;
+  animation-fill-mode: both;
+}
+.fade-out {
+  display: block;
+  animation-name: fade-out-ani;
+  animation-fill-mode: both;
+}
+div[class$="-sec"] {
+  display: none;
+}
+body > .container .fade-in {
+  display: block;
+  animation-name: fade-in-ani;
+  animation-fill-mode: both;
+}
+@keyframes fade-in-ani {
+  0% {
+      opacity: 0;
+  }
+  100%{
+      opacity: 1;
+  }
+}
+body > .container .fade-out {
+  display: block;
+  animation-name: fade-out-ani;
+  animation-fill-mode: both;
+}
+@keyframes fade-out-ani {
+  0% {
+      opacity: 1;
+  }
+  100%{
+      opacity: 0;
+  }
+}
+.login-sec {
+  position: absolute;
+  width: 30vw;
+  height: 50vh;
+  top: calc(50% - 30vh);
+  left: calc(50% - 15vw);
+  color: #181818;
+}
+h1.login-word {
+  margin: 3vh 0;
+  text-align: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.login-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  background-color: #fff;
+  opacity: 0.7;
+  border-radius: 0.5rem;
+  padding: 2rem 3rem;
+}
+.login-box>input {
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  margin: 0.8rem;
+  font-size: 1.2rem;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+.login-box>input::placeholder {
+  color: rgba(0, 0, 0, .3);
+  font-size: 1rem;
+}
+.login-box>.btn-login {
+  width: 100%;
+  margin: 1rem;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+.btn-login:hover {
+  border: none;
+  transform: scale(1.15);
+  transition: 0.25s ease-in-out;
+  color: #181818;
+}
+.mid-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.mid-container>span {
+  display: inline-block;
+  vertical-align: center;
+  line-height: 2rem;
+}
+.subtext {
+  letter-spacing: 0.05rem;
+}
+.forgot-pw {
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+.forgot-pw:hover {
+  display: inline-block;
+  transform: scale(1.1);
+  transition: 0.25s ease-in-out;
+}
+.login-signup-box {
+  margin-top: 2rem;
+}
+.login-signup-text {
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  font-weight: 700;
+}
+.login-signup-text:hover {
+  display: inline-block;
+  transform: scale(1.1);
+  transition: 0.25s ease-in-out;
+  font-weight: 700;
+}
+/* SignUp Container */
+.signup-sec {
+  border: 2px solid;
+  position: absolute;
+  width: 30vw;
+  height: 70vh;
+  top: calc(50% - 40vh);
+  left: calc(50% - 15vw);
+  color: #181818;
+}
+h1.signup-word {
+  margin: 3vh 0;
+  text-align: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.signup-back-btn {
+  position: absolute;
+  top: 2rem;
+  left: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  display: none;
+}
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  background-color: #fff;
+  opacity: 0.7;
+  border-radius: 0.5rem;
+  padding: 2rem 2.5rem;
+}
+.signup-form>input {
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  margin: 0.5rem;
+  font-size: 1.2rem;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  /* border: 1px solid; */
+}
+.signup-form>input::placeholder {
+  color: rgba(0, 0, 0, .3);
+  font-size: 1rem;
+}
+.signup-form>.btn-signup {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  border-radius: 0.5rem;
+  outline: none;
+  transform: scale(1);
+  transition: 0.25s ease-in-out;
+  border: none;
+  color: rgba(0, 0, 0, .5);
+}
+.signup-form>.btn-signup.activate {
+  cursor: pointer;
+  color: #181818;
+}
+.btn-signup.activate:hover {
+  cursor: pointer;
+  border: none;
+  transform: scale(1.1);
+  transition: 0.25s ease-in-out;
+  color: #181818;
+}
+.pw-req {
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.6s ease;
+  overflow: hidden;
+  width: 100%;
+  padding-left: 1rem;
+  list-style-type: disc;
+}
+.pw-req.active {
+  max-height: 4.5rem;
+  opacity: 1;
+}
+.pw-req li {
+  padding: 0.1rem 0.1rem;
+  margin: 0.2rem 0;
+  color: rgba(0, 0, 0, .8);
+}
+/* pw hint box */
+.pw-hint-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 2rem 0 0 0;
+  color: rgba(0, 0, 0, .8);
+}
+.hint-selected, .hint-options-container {
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 0.2rem;
+}
+.hint-selected {
+  font-size: 1rem;
+  font-weight: 500;
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+}
+.hint-options-container {
+  order: 1;
+  font-size: 0.8rem;
+  width: 100%;
+  transition: all 0.6s;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+}
+.hint-options-container.active {
+  max-height: 5rem;
+  opacity: 1;
+  overflow-y: scroll;
+}
+.hint-options-container .option, .hint-selected {
+  cursor: pointer;
+}
+.option > label {
+  display: inline-block;
+  padding: 0.3rem 0.5rem;
+  margin: 0.3rem 0 0 0.4rem;
+  width: 100%;
+}
+.pw-hint-box .option:hover {
+  background-color: rgba(0, 0, 0, .2);
+}
+.pw-hint-box label {
+  cursor: pointer;
+}
+.pw-hint-box .option input[type="radio"] {
+  display: none;
+}
