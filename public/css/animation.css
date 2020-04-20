@@ -1,0 +1,37 @@
+.fade-in {
+  display: block;
+  animation-name: fade-in-ani;
+  animation-fill-mode: both;
+}
+.fade-out {
+  display: block;
+  animation-name: fade-out-ani;
+  animation-fill-mode: both;
+}
+
+body div[class$="-page"].fade-in {
+  display: block;
+  animation-name: fade-in-ani;
+  animation-fill-mode: both;
+}
+@keyframes fade-in-ani {
+  0% {
+      opacity: 0;
+  }
+  100%{
+      opacity: 1;
+  }
+}
+body div[class$="-page"].fade-out {
+  display: block;
+  animation-name: fade-out-ani;
+  animation-fill-mode: both;
+}
+@keyframes fade-out-ani {
+  0% {
+      opacity: 1;
+  }
+  100%{
+      opacity: 0;
+  }
+}
