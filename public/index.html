@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/bundle.js" defer></script>
-  <title>weather-html</title>
+  <title>WILL</title>
 </head>
 
 <body>
@@ -15,20 +15,18 @@
       <!-- Login Page Start-->
       <div id="login" class="login-page fade-in">
         <h2 class="login-word">ACCOUNT LOGIN</h2>
-        <div class="login-box">
-          <input type="text" placeholder="Email">
-          <input type="password" placeholder="Password">
-          <div class="mid-container subtext">
-            <span class="checkbox-remember">
-              <input type="checkbox" name="" id="remember">
-              <label for="remember">Remember Me</label>
-            </span>
-            <span class="forgot-pw">
+        <div class="login-form">
+          <label for="login-email"></label>
+          <input type="text" id="login-email" placeholder="Email">
+          <label for="login-pw"></label>
+          <input type="password" id="login-pw" placeholder="Password">
+          <div class="login-mid-container">
+            <span class="login-forgot-pw">
               Forgot password?
             </span>
           </div>
           <button class="btn-login">LOGIN</button>
-          <div class="login-signup-box subtext">Not a member?
+          <div class="login-signup-box">Not a member?
             <span class="login-signup-text">Sign up now</span>
           </div>
         </div>
@@ -40,11 +38,11 @@
         <h2 class="signup-word">SIGNUP</h2>
         <div class="signup-form">
           <label for="signup-username"></label>
-          <input type="text" name="" id="signup-username" placeholder="Name">
+          <input type="text" id="signup-username" placeholder="Name">
           <label for="signup-email"></label>
-          <input type="text" name="" id="signup-email" placeholder="Email">
+          <input type="text" id="signup-email" placeholder="Email">
           <label for="signup-pw"></label>
-          <input type="password" name="" id="signup-pw" placeholder="Password">
+          <input type="password" id="signup-pw" placeholder="Password">
           <ul class="pw-req">
             <li class="pw-req-length">8 Characters</li>
             <li class="pw-req-number">Contains Number</li>
@@ -52,7 +50,7 @@
             <li class="pw-req-special">Contains Special Character</li>
           </ul>
           <label for="signup-confirm-pw"></label>
-          <input type="password" name="" id="signup-confirm-pw" placeholder="Confirm Password">
+          <input type="password" id="signup-confirm-pw" placeholder="Confirm Password">
           <div class="pw-hint-box">
             <div class="hint-options-container">
               <div class="option">
@@ -89,15 +87,36 @@
             </div>
           </div>
           <label for="signup-pw-hint-answer"></label>
-          <input type="text" name="" id="signup-pw-hint-answer" placeholder="Hint Answer">
+          <input type="text" id="signup-pw-hint-answer" placeholder="Hint Answer">
           <button class="btn-signup">CREATE ACCOUNT</button>
         </div>
       </div>
       <!-- Signup Page End-->
       <!-- Forgot-Pw Page Start -->
-      <!-- <div id="signup" class="signup-sec show"> -->
+      <div id="forgot-pw" class="forgot-pw-page">
+        <h2 class="forgot-pw-word">FORGOT PASSWORD</h2>
+        <div class="forgot-pw-box">
+          <label for="forgot-pw-email"></label>
+          <input type="text" id="forgot-pw-email" placeholder="Enter your email">
+          <input type="password" placeholder="Password">
+          <div class="mid-container subtext">
+            <span class="checkbox-remember">
+              <input type="checkbox" name="" id="remember">
+              <label for="remember">Remember Me</label>
+            </span>
+            <span class="forgot-pw">
+              Forgot password?
+            </span>
+          </div>
+          <button class="btn-login">LOGIN</button>
+          <div class="login-signup-box subtext">Not a member?
+            <span class="login-signup-text">Sign up now</span>
+          </div>
+        </div>
+      </div>
       <!-- Forgot-Pw Page End -->
       <!-- Reset-Pw Page Start -->
+
       <!-- Reset-Pw Page End -->
     </div>
     <div class="grid main-page">
@@ -187,9 +206,11 @@
       </div>
       <!-- Clock & Todo -->
       <div class="main-sec">
-        <div class="todo-focus">
-          <h3>What is your main focus?</h3>
-          <input type="text" class="input-todo" autocomplete="off">
+        <div class="focus-wr">
+          <div class="todo-focus">
+            <h3>What is your main focus?</h3>
+            <input type="text" class="input-todo" autocomplete="off">
+          </div>
         </div>
         <!-- <ul class="todo-list">
           <li class="todo">Todo</li><span></span>
@@ -199,14 +220,21 @@
             <i class="btn-todo icon-cancel"></i>
           </li>
         </ul> -->
-        <div class="todo">Todo<span class="icon-plus icon-plus-circled"></span></div>
-        <ul class="todo-list">
-          <li id="myId" class="todo-item">
-            <input id="ck-myid" class="check icon-check-empty icon-check" type="checkbox">
-            <label for="ck-myid">HTML</label>
-            <i class="btn-todo icon-cancel icon-cancel-circled"></i>
-          </li>
-        </ul>
+        <div class="todo-rapping">
+          <div>
+            <div class="todo">todo<span class="icon-plus"></span><span class="icon-plus-circled"></span></div>
+          </div>
+          <ul class="todo-list">
+            <li id="myId" class="todo-item">
+              <input id="ck-myid" class="check icon-check icon-check-empty" type="checkbox">
+              <!-- <span class="icon-check"></span><span class="icon-check-empty"></span> -->
+              <label for="ck-myid" class="todo-content">HTML</label>
+              <div class="btn-todo">
+                <i class="icon-cancel"></i><i class="icon-cancel-circled"></i>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
       <!-- Nothing -->
       <div calss="nothing">
@@ -222,11 +250,7 @@
       <div class="todolist-sec">
         <h1></h1>
         <header class="todo-header">
-          <div class="active-list-container">
-            <span class="list-row active-todo-list">today</span>
-            <i class="icon-wrapper icon-angle-down"></i>
-          </div>
-          <ul class="todo-list-dropdown">
+          <ul class="todo-list-nav">
             <li id="all" class="active">today</li>
             <li id="active">Active</li>
             <li id="completed">Completed</li>
@@ -235,15 +259,19 @@
         <section class="todo-list-section">
           <ul class="todo-list">
             <li id="myId" class="todo-item">
-              <input id="ck-myid" type="checkbox" class="icon-check-empty icon-check">
-              <label for="ck-myid">HTML</label>
-              <i class="btn-todo icon-cancel"></i>
+              <input id="ck-myid" class="check icon-check icon-check-empty" type="checkbox">
+              <!-- <span class="icon-check"></span><span class="icon-check-empty"></span> -->
+              <label for="ck-myid" class="todo-content">HTML</label>
+              <div class="btn-todo">
+                <i class="icon-cancel"></i><i class="icon-cancel-circled"></i>
+              </div>
             </li>
           </ul>
         </section>
         <!-- <i class="icon-th-list-1"></i> -->
-        <i class="icon-th-list-1"></i>
+        <!-- <i class="icon-th-list-1"></i> -->
       </div>
+      <i class="icon-th-list-1"></i>
     </div>
   </div>
 </body>

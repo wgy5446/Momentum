@@ -1,9 +1,11 @@
 
 @import './reset.css';
 @import './fontello.css';
-@import './startPage.css';
+@import './start-page-common.css';
 @import './weather.css';
 @import './todo.css';
+@import './animation.css';
+
 
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 * {
@@ -25,11 +27,18 @@ h1, h2, h3 {
   font-size: 11rem;
   font-weight: 500;
 }
+input, button{
+  outline: 0;
+  background: none;
+}
 .container {
   background: url('../asset/images/ken-cheung-KonWFWUaAuk-unsplash.jpg') no-repeat top;
   background-size: cover;
   opacity: 1;
   overflow: hidden;
+}
+div[class$="-page"] {
+  display: none;
 }
 .grid {
   display: grid;

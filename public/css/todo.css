@@ -4,7 +4,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 /* todo */
-.todo-focus h3 {
+
+.focus-wr {
+  display: flex;
+  justify-content: center;
+  min-height: 93px;
+}
+
+.focus-wr .todo-focus {
+  padding-bottom: 6px;
+}
+
+.focus-wr .todo-focus h3 {
+  display: block;
   text-align: center;
   padding-bottom: 2px;
   font-size: 50px;
@@ -13,32 +25,128 @@
 }
 
 .input-todo {
+  display: block;
   padding-top: 4px;
   background: 0;
   width: 560px;
   height: 30px;
   outline: 0;
   border: 0;
-  border-bottom: 3px solid #fff;
+  border-bottom: 2px solid #fff;
   font-size: xx-large;
   color: #fff;
-  text-align: right;
+  text-align: center;
   font-weight: 500;
 }
 
+.todo-rapping {
+  width: 100%;
+  position: relative;
+  top: 0;
+}
+
 .todo {
+  margin: 17px 0 3px;
+  font-size: 70%;
+  line-height: 120%;
+  text-transform: uppercase;
   text-align: center;
-  
+  position: relative;
+}
+
+.todo .icon-plus-circled {
+  display: none;
+}
+
+.todo .icon-plus, .icon-plus-circled {
+  position: absolute;
+  top: 0;
+  padding-left: 5px;
+}
+
+.todo > .icon-plus:hover + .icon-plus-circled {
+ display: inline-block;
+ color: #181818;
+}
+
+.todo-list {
+  display: inline-block;
+  text-align: center;
+  min-height: 181px;
+  max-height: 181px;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  opacity: 1;
 }
 
 
+.todo-list > li > .check {
+  margin-left: .15em;
+  padding: 10px;
+  position: relative;
+  top: 0;
+  left: -3px;
+  border: none;
+  font-size: 136%;
+  text-shadow: 0 0 15px rgba(0,0,0,.3);
+  display: none;
+}
+
+
+.todo-list > li > .todo-content {
+  max-width: 87%;
+  margin-top: 10px;
+  margin-left: 5px;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.todo-list > li > .btn-todo {
+  padding-top: 9.7px;
+  display: none;
+  position: relative;
+  padding-left: 5px;
+}
+
+.todo-list > li > .btn-todo > .icon-cancel, .icon-cancel-circled {
+  position: absolute;
+  top: 0;
+}
+
+.todo-item {
+  width: 100%;
+  display: inline-block;
+  visibility: visible;
+  opacity: 1;
+  color: #fff;
+}
+
+.icon-cancel-circled {
+  display: none;
+}
+.todo-item:hover > .btn-todo{
+  display: inline-block;
+}
+
+.todo-item:hover > .btn-todo:hover > .icon-cancel-circled {
+  display: inline-block;
+  color: #181818;
+}
+
+.todo-item:hover > .icon-check{
+  display: inline-block;
+}
 /* todolist  */
 .todolist-sec {
   position: relative;
-  top: -120px;
-  padding: 10px 10px;
+  top: -170px;
+  padding: 0px;
   display: block;
-  width: 330px;
+  width: 430px;
+  height: auto;
   min-height: auto;
   overflow-y: scroll;
   opacity: 1;
@@ -54,17 +162,19 @@
   position: relative;
   z-index: 2;
   cursor: pointer;
+  margin-bottom: 15px;
 }
 
-.todo-header .list-row, .icon-angle-down {
+.todo-header .todo-list-nav {
   color: #fff;
   font-size: 20px;
+  font-weight: 500;
   font-family: 'https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap';
 }
 
-.todo-list-dropdown {
-  display: none;
-  margin-left: -4px;
+.todo-list-nav {
+  display: flex;
+  margin: 0;
   position: absolute;
   top: 0;
   box-shadow: 0 2px 2px rgba(0,0,0,.15);
@@ -72,14 +182,13 @@
   z-index: 11;
 }
 
-.todo-list-dropdown > li {
+.todo-list-nav > li {
   background-color: #181818;
-  width: 240px;
-  padding: 7px 16px;
-  position: relative;
-  left: -10px;
-  box-sizing: border-box;
+  width: 100%;
+  /* width: 240px; */
+  padding: 4px 10px;
   font-size: 93.75%;
+  text-align: left;
   line-height: normal;
   white-space: nowrap;
   color: #fff;
@@ -96,20 +205,8 @@
   overflow: hidden;
 }
 
-.todo-list {
-  min-height: 181px;
-  max-height: 181px;
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  opacity: 1;
+.todo-list-nav > li.active {
+  background-color: #333;
 }
 
-.todo-item {
-  width: 100%;
-  display: inline-block;
-  visibility: visible;
-  opacity: 1;
-  color: #fff;
-}
 
