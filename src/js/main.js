@@ -1,20 +1,58 @@
 // src/js/main.js
-import { pi, power, Foo } from './lib';
+import { fadeIn, fadeOut } from './animation';
+// 로그인페이지에서 사인업 페이지로 넘어가는 애니메이션
+const $loginSignUp = document.querySelector('.login-signup-text');
+const $loginPage = document.querySelector('#login');
+const $mainPage = document.querySelector('.main-page');
+const $btnLogin = document.querySelector('.btn-login');
+const $signupPage = document.querySelector('.signup-page');
+const $signupBackBtn = document.querySelector('.signup-back-btn');
+const $signupPw = document.querySelector('#signup-pw');
+const $pwReq = document.querySelector('.pw-req');
+const $hintSelected = document.querySelector('.hint-selected');
+const $optionsContainer = document.querySelector('.hint-options-container');
+const $loginContainer = document.querySelector('.login-container');
 
-console.log(pi);
-console.log(power(pi, pi));
-
-const f = new Foo();
-console.log(f.foo());
-console.log(f.bar());
-
-// polyfill이 필요한 코드
-console.log(new Promise((resolve, reject) => {
-  setTimeout(() => resolve(1), 100);
-}));
-
-// polyfill이 필요한 코드
-console.log({ x: 1, y: 2 });
-
-// polyfill이 필요한 코드
-console.log(Array.from([1, 2, 3], v => v + v));
+$loginSignUp.onclick = () => {
+  fadeOut($loginPage, 700);
+  setTimeout(() => {
+    fadeIn($signupPage, 700);
+  }, 700);
+};
+// 싸인업 페이지의 셀렉트 박스 기능
+$hintSelected.onclick = () => {
+  $optionsContainer.classList.toggle('active');
+};
+$optionsContainer.onclick = ({ target }) => {
+  if (!target.matches('div.option > label')) return;
+  $optionsContainer.classList.toggle('active');
+  $hintSelected.textContent = target.textContent;
+};
+$btnLogin.onclick = () => {
+  fadeOut($loginPage, 700);
+  setTimeout(() => {
+    fadeIn($mainPage, 700);
+    $loginContainer.style.display = 'none';
+  }, 700);
+};
+// 싸인업 페이지에서 패스워드 focus됬을때 조건을 부드럽게 보여주는 기능
+$signupPw.onfocus = () => {
+  $pwReq.classList.toggle('active');
+};
+$signupPw.onblur = () => {
+  $pwReq.classList.toggle('active');
+};
+// signup page hover -> show back btn
+$signupPage.onmouseover = () => {
+  fadeIn($signupBackBtn, 300);
+};
+$signupPage.onmouseleave = () => {
+  fadeOut($signupBackBtn, 300);
+};
+//signup back btn
+$signupBackBtn.onclick = () => {
+  fadeOut($signupPage, 700);
+  setTimeout(() => {
+    fadeIn($loginPage, 700);
+  }, 700);
+};
