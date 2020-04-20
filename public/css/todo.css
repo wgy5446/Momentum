@@ -4,7 +4,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 /* todo */
-.todo-focus h3 {
+
+.focus-wr {
+  display: flex;
+  justify-content: center;
+  min-height: 93px;
+}
+
+.focus-wr .todo-focus {
+  padding-bottom: 6px;
+}
+
+.focus-wr .todo-focus h3 {
+  display: block;
   text-align: center;
   padding-bottom: 2px;
   font-size: 50px;
@@ -13,32 +25,75 @@
 }
 
 .input-todo {
+  display: block;
   padding-top: 4px;
   background: 0;
   width: 560px;
   height: 30px;
   outline: 0;
   border: 0;
-  border-bottom: 3px solid #fff;
+  border-bottom: 2px solid #fff;
   font-size: xx-large;
   color: #fff;
-  text-align: right;
+  text-align: center;
   font-weight: 500;
 }
 
-.todo {
-  text-align: center;
-  
+.todo-rapping {
+  width: 100%;
+  position: relative;
+  top: 0;
 }
 
+.todo {
+  margin: 17px 0 3px;
+  font-size: 70%;
+  line-height: 120%;
+  text-transform: uppercase;
+  text-align: center;
+}
 
+.icon-plus, .icon-plus-circled{
+  display: inline-block;
+  padding-left: 5px;
+}
+
+.todo-list {
+  text-align: center;
+}
+
+.todo-list > li > .check {
+  margin-left: .15em;
+  padding: 10px;
+  position: relative;
+  border: 0;
+  font-size: 80%;
+  line-height: 1;
+  text-align: left;
+  text-shadow: 0 0 15px rgba(0,0,0,.3);
+  display: none;
+}
+
+.todo-list > li > .todo-content {
+  max-width: 87%;
+  margin: 3px 0;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.todo-list > li > .btn-todo {
+  padding-top: 3px;
+}
 /* todolist  */
 .todolist-sec {
   position: relative;
-  top: -120px;
+  top: -170px;
   padding: 10px 10px;
   display: none;
-  width: 330px;
+  width: 430px;
+  height: auto;
   min-height: auto;
   overflow-y: scroll;
   opacity: 1;
