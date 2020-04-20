@@ -25,7 +25,7 @@
 
 /* weather box */
 .weather-box {
-  /* display: none; */
+  display: none;
   background: #181818;
   margin-top: 1rem;
   padding: 1rem;
