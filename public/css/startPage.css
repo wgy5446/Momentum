@@ -1,23 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import './reset.css';
 @import './fontello.css';
-* {
-  box-sizing: border-box;
-}
-body {
-  font-size: 10px;
-  font-family: 'Manrope';
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  box-sizing: border-box;
-  background-color: rgba(0, 0, 0, 0.7);
-}
-.container {
-  /* background-image: url(../asset/images/bailey-zindel-NRQV-hBF10M-unsplash.jpg); */
-  /* background-image: url(../asset/images/alex-king-Pa0AqyCLeec-unsplash.jpg); */
-  /* background-image: url(../asset/images/mountain-4021090_1920.jpg); */
-  background-image: url(../asset/images/waterfall-5028130.jpg);
+.login-container {
   width: 100%;
   height: 100vh;
   background-size: cover;
@@ -32,10 +16,10 @@ body {
   animation-name: fade-out-ani;
   animation-fill-mode: both;
 }
-div[class$="-sec"] {
+div[class$="-page"] {
   display: none;
 }
-body > .container .fade-in {
+body div[class$="-page"].fade-in {
   display: block;
   animation-name: fade-in-ani;
   animation-fill-mode: both;
@@ -48,7 +32,7 @@ body > .container .fade-in {
       opacity: 1;
   }
 }
-body > .container .fade-out {
+body div[class$="-page"].fade-out {
   display: block;
   animation-name: fade-out-ani;
   animation-fill-mode: both;
@@ -61,7 +45,7 @@ body > .container .fade-out {
       opacity: 0;
   }
 }
-.login-sec {
+.login-page {
   position: absolute;
   width: 30vw;
   height: 50vh;
@@ -69,7 +53,8 @@ body > .container .fade-out {
   left: calc(50% - 15vw);
   color: #181818;
 }
-h1.login-word {
+.container h2.login-word {
+  display: block;
   margin: 3vh 0;
   text-align: center;
   color: #fff;
@@ -156,17 +141,18 @@ h1.login-word {
   font-weight: 700;
 }
 /* SignUp Container */
-.signup-sec {
-  border: 2px solid;
+.signup-page {
+  /* border: 2px solid; */
   position: absolute;
   width: 30vw;
   height: 70vh;
-  top: calc(50% - 40vh);
+  top: calc(50% - 35vh);
   left: calc(50% - 15vw);
   color: #181818;
 }
-h1.signup-word {
-  margin: 3vh 0;
+.container h2.signup-word {
+  display: block;
+  margin: 2vh 0;
   text-align: center;
   color: #fff;
   font-size: 1.5rem;

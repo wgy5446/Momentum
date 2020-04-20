@@ -10297,18 +10297,21 @@ __webpack_require__.r(__webpack_exports__);
  // 로그인페이지에서 사인업 페이지로 넘어가는 애니메이션
 
 var $loginSignUp = document.querySelector('.login-signup-text');
-var $loginSec = document.querySelector('#login');
-var $signupSec = document.querySelector('.signup-sec');
+var $loginPage = document.querySelector('#login');
+var $mainPage = document.querySelector('.main-page');
+var $btnLogin = document.querySelector('.btn-login');
+var $signupPage = document.querySelector('.signup-page');
 var $signupBackBtn = document.querySelector('.signup-back-btn');
 var $signupPw = document.querySelector('#signup-pw');
 var $pwReq = document.querySelector('.pw-req');
 var $hintSelected = document.querySelector('.hint-selected');
 var $optionsContainer = document.querySelector('.hint-options-container');
+var $loginContainer = document.querySelector('.login-container');
 
 $loginSignUp.onclick = function () {
-  Object(_animation__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])($loginSec, 700);
+  Object(_animation__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])($loginPage, 700);
   setTimeout(function () {
-    Object(_animation__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])($signupSec, 700);
+    Object(_animation__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])($signupPage, 700);
   }, 700);
 }; // 싸인업 페이지의 셀렉트 박스 기능
 
@@ -10322,6 +10325,14 @@ $optionsContainer.onclick = function (_ref) {
   if (!target.matches('div.option > label')) return;
   $optionsContainer.classList.toggle('active');
   $hintSelected.textContent = target.textContent;
+};
+
+$btnLogin.onclick = function () {
+  Object(_animation__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])($loginPage, 700);
+  setTimeout(function () {
+    Object(_animation__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])($mainPage, 700);
+    $loginContainer.style.display = 'none';
+  }, 700);
 }; // 싸인업 페이지에서 패스워드 focus됬을때 조건을 부드럽게 보여주는 기능
 
 
@@ -10334,19 +10345,19 @@ $signupPw.onblur = function () {
 }; // signup page hover -> show back btn
 
 
-$signupSec.onmouseover = function () {
+$signupPage.onmouseover = function () {
   Object(_animation__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])($signupBackBtn, 300);
 };
 
-$signupSec.onmouseleave = function () {
+$signupPage.onmouseleave = function () {
   Object(_animation__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])($signupBackBtn, 300);
 }; //signup back btn
 
 
 $signupBackBtn.onclick = function () {
-  Object(_animation__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])($signupSec, 700);
+  Object(_animation__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])($signupPage, 700);
   setTimeout(function () {
-    Object(_animation__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])($loginSec, 700);
+    Object(_animation__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])($loginPage, 700);
   }, 700);
 };
 
