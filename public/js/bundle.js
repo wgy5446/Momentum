@@ -10293,7 +10293,9 @@ var fadeOut = function fadeOut(target, duration) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _animation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./animation */ "./src/js/animation.js");
+/* harmony import */ var _weather__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./weather */ "./src/js/weather.js");
 // src/js/main.js
+
  // 로그인페이지에서 사인업 페이지로 넘어가는 애니메이션
 
 var $loginSignUp = document.querySelector('.login-signup-text');
@@ -10359,7 +10361,88 @@ $signupBackBtn.onclick = function () {
   setTimeout(function () {
     Object(_animation__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])($loginPage, 700);
   }, 700);
+}; // weather start
+
+
+var $wMain = document.querySelector('.weather-main');
+var $wBox = document.querySelector('.weather-box');
+
+$wMain.onclick = function () {
+  $wBox.style.display === 'block' ? Object(_weather__WEBPACK_IMPORTED_MODULE_1__["closeWeatherBox"])($wBox) : Object(_weather__WEBPACK_IMPORTED_MODULE_1__["openWeatherBox"])($wBox);
+}; // weather end
+
+/***/ }),
+
+/***/ "./src/js/weather.js":
+/*!***************************!*\
+  !*** ./src/js/weather.js ***!
+  \***************************/
+/*! exports provided: openWeatherBox, closeWeatherBox */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openWeatherBox", function() { return openWeatherBox; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "closeWeatherBox", function() { return closeWeatherBox; });
+var openWeatherBox = function openWeatherBox(weatherbox) {
+  weatherbox.style.display = 'block';
 };
+
+var closeWeatherBox = function closeWeatherBox(weatherbox) {
+  weatherbox.style.display = 'none';
+};
+
+var API_KEY = 'bbcad54aeb4d627c3798f0773d883830';
+
+var currentRender = function currentRender(res) {
+  var temperature = res.main.temp;
+  console.log('current', temperature);
+}; // const weeklyRender = res => {
+//   const temperature = res.current.temp;
+//   console.log('weekly', temperature);
+// };
+// const randomBg = () => { console.log('random bg'); };
+
+
+var getCurrentWeather = function getCurrentWeather(lat, lng) {
+  fetch("https://api.openweathermap.org/data/2.5/weather?lat=".concat(lat, "&lon=").concat(lng, "&appid=").concat(API_KEY, "$units=metric")).then(function (res) {
+    return res.json();
+  }).then(function (res) {
+    console.log('[current]', res);
+    currentRender(res);
+  });
+}; // const getWeeklyWeather = (lat, lng) => {
+//   fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`)
+//     .then(res => res.json())
+//     .then(res => {
+//       console.log('[weekly]', res);
+//       weeklyRender(res);
+//     });
+// };
+// Coords
+
+
+var succesLocation = function succesLocation(position) {
+  var latitude = position.coords.latitude;
+  var longitude = position.coords.longitude;
+  console.log('[coords]', latitude, longitude);
+  getCurrentWeather(latitude, longitude); // getWeeklyWeather(latitude, longitude);
+};
+
+var errorLocation = function errorLocation() {
+  alert('Sorry, no position available.');
+};
+
+var getLocation = function getLocation() {
+  navigator.geolocation.getCurrentPosition(succesLocation, errorLocation);
+};
+
+var weatherInit = function weatherInit() {
+  getLocation();
+};
+
+weatherInit();
+
 
 /***/ }),
 
