@@ -212,28 +212,19 @@
             <input type="text" class="input-todo" autocomplete="off">
           </div>
         </div>
-        <!-- <ul class="todo-list">
-          <li class="todo">Todo</li><span></span>
-          <li id="myId" class="todo-item">
-            <input id="ck-myid" class="check icon-check-empty" type="checkbox">
-            <label for="ck-myid">Css</label>
-            <i class="btn-todo icon-cancel"></i>
-          </li>
-        </ul> -->
         <div class="todo-rapping">
           <div>
             <div class="todo">todo<span class="icon-plus"></span><span class="icon-plus-circled"></span></div>
           </div>
-          <ul class="todo-list">
-            <li id="myId" class="todo-item">
-              <input id="ck-myid" class="check icon-check icon-check-empty" type="checkbox">
-              <!-- <span class="icon-check"></span><span class="icon-check-empty"></span> -->
+          <div class="todo-heading">
+            <div class="todo-daily">
+              <input id="ck-myid" type="checkbox" class="checkbox">
               <label for="ck-myid" class="todo-content">HTML</label>
               <div class="btn-todo">
                 <i class="icon-cancel"></i><i class="icon-cancel-circled"></i>
               </div>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
       <!-- Nothing -->
@@ -248,32 +239,30 @@
       </div>
       <!-- TodoList -->
       <div class="todolist-sec">
-        <h1></h1>
-        <header class="todo-header">
-          <ul class="todo-list-nav">
-            <li id="all" class="active">today</li>
-            <li id="active">Active</li>
-            <li id="completed">Completed</li>
-          </ul>
-        </header>
-        <section class="todo-list-section">
-          <ul class="todo-list">
-            <li id="myId" class="todo-item">
-              <input id="ck-myid" class="check icon-check icon-check-empty" type="checkbox">
-              <!-- <span class="icon-check"></span><span class="icon-check-empty"></span> -->
-              <label for="ck-myid" class="todo-content">HTML</label>
-              <div class="btn-todo">
-                <i class="icon-cancel"></i><i class="icon-cancel-circled"></i>
-              </div>
-            </li>
-          </ul>
-        </section>
-        <!-- <i class="icon-th-list-1"></i> -->
-        <!-- <i class="icon-th-list-1"></i> -->
+        <h2></h2>
+        <i class="icon-th-list-1"></i>
+        <div class="todolist-menu">
+          <div class="todo-header">
+            <ul class="todo-list-nav">
+              <li id="all" class="active">today</li>
+              <li id="active">Active</li>
+              <li id="completed">Completed</li>
+            </ul>
+          </div>
+          <div class="todo-list-section">
+            <ul class="todo-list">
+              <li id="myId" class="todo-item">
+                <input id="ck-myid" class="checkbox" type="checkbox">
+                <label for="ck-myid" class="todo-content">HTML</label>
+                <div class="btn-todo">
+                  <i class="icon-cancel"></i><i class="icon-cancel-circled"></i>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <i class="icon-th-list-1"></i>
     </div>
   </div>
 </body>
-
 </html>
