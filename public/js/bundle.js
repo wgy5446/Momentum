@@ -10369,7 +10369,9 @@ var $wBox = document.querySelector('.weather-box');
 
 $wMain.onclick = function () {
   $wBox.style.display === 'block' ? Object(_weather__WEBPACK_IMPORTED_MODULE_1__["closeWeatherBox"])($wBox) : Object(_weather__WEBPACK_IMPORTED_MODULE_1__["openWeatherBox"])($wBox);
-}; // weather end
+};
+
+Object(_weather__WEBPACK_IMPORTED_MODULE_1__["weatherInit"])(); // weather end
 
 /***/ }),
 
@@ -10377,13 +10379,14 @@ $wMain.onclick = function () {
 /*!***************************!*\
   !*** ./src/js/weather.js ***!
   \***************************/
-/*! exports provided: openWeatherBox, closeWeatherBox */
+/*! exports provided: openWeatherBox, closeWeatherBox, weatherInit */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openWeatherBox", function() { return openWeatherBox; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "closeWeatherBox", function() { return closeWeatherBox; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "weatherInit", function() { return weatherInit; });
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -10442,7 +10445,7 @@ var weatherRender = function weatherRender(res) {
   if (currentId >= 700 && currentId < 800) currentIcon = 'icon-clouds';
   if (currentId === 800) currentIcon = 'icon-sun';
   if (currentId > 800) currentIcon = 'icon-cloud-sun';
-  $weatherMain.innerHTML = "\n    <i class=\"".concat(currentIcon, " main-i main-i-id\"></i>\n    <span class=\"main-temp\">").concat(temperature, "</span>\n    <i class=\"icon-celcius main-celcius\"></i>\n    <div class=\"main-location\">").concat(city, ", ").concat(continent, "</div>\n  ");
+  $weatherMain.innerHTML = "\n    <i class=\"".concat(currentIcon, " main-i main-i-id\"></i>\n    <span class=\"main-temp\">").concat(temperature, "</span>\n    <i class=\"icon- main-celccelciusius\"></i>\n    <div class=\"main-location\">").concat(city, ", ").concat(continent, "</div>\n  ");
   $boxTop.innerHTML = "\n    <div class=\"box-location\">".concat(city, ", ").concat(continent, "</div>\n    <div class=\"box-state box-state-id\">").concat(description, "</div>\n    <i class=\"").concat(currentIcon, " box-i box-i-id\"></i>\n    <span class=\"box-temp\">").concat(temperature, "</span>\n    <i class=\"icon-celcius box-celcius\"></i>\n  ");
   var $weeklyDay = document.querySelector('.weekly-day');
   dayName.forEach(function (_, i, arr) {
@@ -10498,7 +10501,6 @@ var weatherInit = function weatherInit() {
   getLocation();
 };
 
-weatherInit();
 
 
 /***/ }),

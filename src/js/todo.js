@@ -4,6 +4,7 @@ let todos = [];
 
 // DOM
 const $todolist = document.querySelector('.todo-list');
+const $inputTodo = document.querySelector('.input-todo');
 
 const render = () => {
   let html = '';
@@ -29,3 +30,8 @@ const getTodo = () => {
 };
 
 window.onload = getTodo;
+
+$inputTodo.onkeyup = ({keyCode, target}) => {
+  const content = target.value.trim();
+  if (keyCode !== 13 || content = '') return;
+}
