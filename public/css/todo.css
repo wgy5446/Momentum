@@ -1,26 +1,21 @@
-
 /* Todo */
 .focus-wr {
   display: flex;
   justify-content: center;
   min-height: 9.3rem;
 }
-
 .focus-wr .todo-focus {
   padding-bottom: 0.6rem;
 }
-
 .todo-focus {
   position: relative;
 }
-
 .focus-wr .todo-focus h3 {
   display: block;
   text-align: center;
   padding-bottom: 0.2rem;
   font-size: 2.5rem;
 }
-
 .input-todo {
   display: block;
   padding-top: 0.4rem;
@@ -36,11 +31,9 @@
   transition: border-color .2s ease;
   color: #fff;
 }
-
 .todo-rapping {
   text-align: center;
 }
-
 .todo {
   margin: 1.7rem 0 0.3rem;
   font-size: 7rem;
@@ -50,23 +43,19 @@
   position: relative;
   font-size: 1.5rem;
 }
-
 .todo .icon-plus-circled {
   display: none;
 }
-
 .todo .icon-plus, .icon-plus-circled {
   position: absolute;
   top: 0;
   padding-left: 0.5rem;
   cursor: pointer;
 }
-
 .todo > .icon-plus:hover + .icon-plus-circled {
  display: inline-block;
  color: #181818;
 }
-
 .todo-heading {
   display: block;
   text-align: center;
@@ -77,14 +66,10 @@
   overflow-y: auto;
   opacity: 1;
 }
-
-
 /* 체크박스 */
-
 .checkbox {
   display: none;
 }
-
 .checkbox + label {
   position: relative;
   top: 0;
@@ -95,7 +80,6 @@
   cursor: pointer;
   user-select: none;
 }
-
 .checkbox + label:before {
   content: "\f096";
   position: absolute;
@@ -103,7 +87,6 @@
   left: 0;
   display: none;
 }
-
 .checkbox:checked + label:after {
   content: "\e800";
   position: absolute;
@@ -111,41 +94,32 @@
   left: 0;
   display: none;
 }
-
 .todo-daily:hover > label:before {
   display: inline;
 }
-
 .todo-daily:hover > label:after {
   display: inline;
 }
-
-
 .todo-item:hover > label:before {
   display: inline;
 }
-
 .todo-item:hover > label:after {
   display: inline;
 }
-
 /* todo-content */
 .todo-heading > .todo-daily > .todo-content {
  display: inline-block;
 }
-
 /* 취소 버튼 */
 .todo-heading > .todo-daily > .btn-todo {
   display: none;
   position: absolute;
   cursor: pointer;
 }
-
 .todo-heading > .todo-daily >.btn-todo > .icon-cancel, .icon-cancel-circled {
   position: absolute;
   top: 0;
 }
-
 .todo-daily {
   width: auto;
   display: inline-block;
@@ -153,19 +127,16 @@
   opacity: 1;
   font-size: 1.9rem;
 }
-
 .icon-cancel-circled {
   display: none;
 }
 .todo-daily:hover > .btn-todo{
   display: inline-block;
 }
-
 .todo-daily:hover > .btn-todo:hover > .icon-cancel-circled {
   display: inline-block;
   color: #181818;
 }
-
 .todo-daily:hover > .icon-check{
   display: inline-block;
 }
@@ -192,28 +163,23 @@
   border-radius: 10px;
   text-align: left;
 }
-
 /* width */
 .todolist-menu::-webkit-scrollbar {
   width: auto;
 }
-
 /* Track */
 .todolist-menu::-webkit-scrollbar-track {
   background: 0;
 }
- 
 /* Handle */
 .todolist-menu::-webkit-scrollbar-thumb {
   background: #888; 
   border-radius: 10px;
 }
-
 /* Handle on hover */
 .todolist-menu::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
-
 .todo-header {
   display: block;
   height: 3rem;
@@ -222,12 +188,10 @@
   cursor: pointer;
   margin-bottom: 1.5rem;
 }
-
 .todo-header .todo-list-nav {
   font-size: 1.5rem;
   font-weight: 500;
 }
-
 .todo-list-nav {
   display: flex;
   position: absolute;
@@ -236,7 +200,6 @@
   padding: 1rem 0;
   z-index: 11;
 }
-
 .todo-list-nav > li {
   background-color: #181818;
   width: 100%;
@@ -247,7 +210,6 @@
   line-height: normal;
   white-space: nowrap;
 }
-
 .todo-list-section {
   min-height: 11rem;
   max-height: 11rem;
@@ -257,11 +219,9 @@
   z-index: 1;
   overflow: hidden;
 }
-
 .todo-list-nav > li.active {
   background-color: #333;
 }
-
 .todo-list {
   display: inline-block;
   text-align: left;
@@ -272,24 +232,19 @@
   overflow-y: hidden;
   opacity: 1;
 }
-
-
 .todo-list > li > .todo-content {
   display: inline-block;
 }
-
 .todo-list > li > .btn-todo {
   display: none;
   position: absolute;
   left: 81px;
   cursor: pointer;
 }
-
 .todo-list > li > .btn-todo > .icon-cancel, .icon-cancel-circled {
   position: absolute;
   top: 0;
 }
-
 .todo-item {
   width: auto;
   display: block;
@@ -298,16 +253,13 @@
   font-size: 1rem;
   margin-left: 10px;
 }
-
 .todo-item:hover > .btn-todo{
   display: inline-block;
 }
-
 .todo-item:hover > .btn-todo:hover > .icon-cancel-circled {
   display: inline-block;
   color: #181818;
 }
-
 .todo-item:hover > .icon-check{
   display: inline-block;
 }
