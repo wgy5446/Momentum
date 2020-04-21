@@ -10384,49 +10384,106 @@ $wMain.onclick = function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openWeatherBox", function() { return openWeatherBox; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "closeWeatherBox", function() { return closeWeatherBox; });
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+// DOMs
+var $weatherMain = document.querySelector('.weather-main');
+var $boxTop = document.querySelector('.box-top');
+var $weeklyTemp = document.querySelector('.weekly-temp');
+var $weeklyIcon = document.querySelector('.weekly-i'); // toggle weather box
+
 var openWeatherBox = function openWeatherBox(weatherbox) {
   weatherbox.style.display = 'block';
 };
 
 var closeWeatherBox = function closeWeatherBox(weatherbox) {
   weatherbox.style.display = 'none';
-};
+}; // Weather API
+
 
 var API_KEY = 'bbcad54aeb4d627c3798f0773d883830';
 
-var currentRender = function currentRender(res) {
-  var temperature = res.main.temp;
-  console.log('current', temperature);
-}; // const weeklyRender = res => {
-//   const temperature = res.current.temp;
-//   console.log('weekly', temperature);
-// };
-// const randomBg = () => { console.log('random bg'); };
+var weatherRender = function weatherRender(res) {
+  var _res$timezone$split = res.timezone.split('/'),
+      _res$timezone$split2 = _slicedToArray(_res$timezone$split, 2),
+      continent = _res$timezone$split2[0],
+      city = _res$timezone$split2[1];
+
+  var temperature = Math.floor(res.current.temp);
+
+  var _res$current$weather = _slicedToArray(res.current.weather, 1),
+      _res$current$weather$ = _res$current$weather[0],
+      currentId = _res$current$weather$.id,
+      description = _res$current$weather$.description;
+
+  var weeklyId = res.daily.map(function (day) {
+    return day.weather.reduce(function (acc, dayW) {
+      return acc + dayW.id;
+    }, 0);
+  });
+  var weeklyTemp = res.daily.map(function (day) {
+    return [Math.floor(day.temp.min), Math.floor(day.temp.max)];
+  });
+  var dayName = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+  var currentIcon = '';
+  if (currentId >= 200 && currentId < 300) currentIcon = 'icon-clouds';
+  if (currentId >= 300 && currentId < 400) currentIcon = 'icon-cloud-sun';
+  if (currentId >= 500 && currentId < 700) currentIcon = 'icon-rain';
+  if (currentId >= 700 && currentId < 800) currentIcon = 'icon-clouds';
+  if (currentId === 800) currentIcon = 'icon-sun';
+  if (currentId > 800) currentIcon = 'icon-cloud-sun';
+  $weatherMain.innerHTML = "\n    <i class=\"".concat(currentIcon, " main-i main-i-id\"></i>\n    <span class=\"main-temp\">").concat(temperature, "</span>\n    <i class=\"icon-celcius main-celcius\"></i>\n    <div class=\"main-location\">").concat(city, ", ").concat(continent, "</div>\n  ");
+  $boxTop.innerHTML = "\n    <div class=\"box-location\">".concat(city, ", ").concat(continent, "</div>\n    <div class=\"box-state box-state-id\">").concat(description, "</div>\n    <i class=\"").concat(currentIcon, " box-i box-i-id\"></i>\n    <span class=\"box-temp\">").concat(temperature, "</span>\n    <i class=\"icon-celcius box-celcius\"></i>\n  ");
+  var $weeklyDay = document.querySelector('.weekly-day');
+  dayName.forEach(function (_, i, arr) {
+    var today = new Date();
+    $weeklyDay.innerHTML += "<span class=\"day-id\">".concat(arr[(today.getDay() + i) % 7], "</span>");
+  });
+  var weeklyIcon = '';
+  weeklyId.forEach(function (dailyId) {
+    if (dailyId >= 200 && dailyId < 300) weeklyIcon = 'icon-clouds';
+    if (dailyId >= 300 && dailyId < 400) weeklyIcon = 'icon-cloud-sun';
+    if (dailyId >= 500 && dailyId < 700) weeklyIcon = 'icon-rain';
+    if (dailyId >= 700 && dailyId < 800) weeklyIcon = 'icon-clouds';
+    if (dailyId === 800) weeklyIcon = 'icon-sun';
+    if (dailyId > 800) weeklyIcon = 'icon-clouds';
+    $weeklyIcon.innerHTML += "<i class=\"".concat(weeklyIcon, " i-id\"></i>");
+  });
+  weeklyTemp.forEach(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        min = _ref2[0],
+        max = _ref2[1];
+
+    $weeklyTemp.innerHTML += "\n      <div class=\"weelky-temp-id\">\n        <span class=\"weekly-max-id\">".concat(max, "</span>\n        <span class=\"weekly-min-id\">").concat(min, "</span>\n      </div>\n    ");
+  });
+  $weeklyIcon.removeChild($weeklyIcon.lastElementChild);
+  $weeklyTemp.removeChild($weeklyTemp.lastElementChild);
+}; // Get weather Object
 
 
-var getCurrentWeather = function getCurrentWeather(lat, lng) {
-  fetch("https://api.openweathermap.org/data/2.5/weather?lat=".concat(lat, "&lon=").concat(lng, "&appid=").concat(API_KEY, "$units=metric")).then(function (res) {
+var getWeather = function getWeather(lat, lng) {
+  fetch("https://api.openweathermap.org/data/2.5/onecall?lat=".concat(lat, "&lon=").concat(lng, "&appid=").concat(API_KEY, "&units=metric")).then(function (res) {
     return res.json();
   }).then(function (res) {
-    console.log('[current]', res);
-    currentRender(res);
+    return weatherRender(res);
   });
-}; // const getWeeklyWeather = (lat, lng) => {
-//   fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`)
-//     .then(res => res.json())
-//     .then(res => {
-//       console.log('[weekly]', res);
-//       weeklyRender(res);
-//     });
-// };
-// Coords
+}; // Get Coordinate
 
 
 var succesLocation = function succesLocation(position) {
   var latitude = position.coords.latitude;
   var longitude = position.coords.longitude;
-  console.log('[coords]', latitude, longitude);
-  getCurrentWeather(latitude, longitude); // getWeeklyWeather(latitude, longitude);
+  getWeather(latitude, longitude);
 };
 
 var errorLocation = function errorLocation() {
