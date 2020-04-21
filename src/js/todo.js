@@ -1,5 +1,8 @@
+// state
+
 let todos = [];
 
+// DOM
 const $todolist = document.querySelector('.todo-list');
 
 const render = () => {
@@ -20,7 +23,6 @@ const getTodo = () => {
   fetch('/todos', {
     method: 'GET'
   })
-  .then(res => res.json())
   .then(_todo => todos = _todo)
   .catch(new Error('Error'))
   .then(render)
