@@ -1,5 +1,99 @@
+/* main todo */
+.todo-focus-before{
+  font-size: 2.5rem;
+  display: none;
+}
+.todo-focus-before h3{
+  display:block;
+  font-size: 2.6rem;
+}
+/* .todo-focus-after{
+  display: none;
+} */
+.todo-focus-after{
+  padding-top: 1rem;
+}
+.todo-focus-after h3{
+  display:block;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.input-todo{
+  border: 0;
+  border-bottom: 2px solid #fff;
+  width: 70%;
+  font-size: 2rem;
+  color: #fff;
+  text-align: center;
+  padding: 2rem 0 .5rem 0;
+  margin-bottom: 1rem;
+}
+.add-todo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.add-icon, .check-icon, .delete-icon{
+  font-size: 1.5rem;
+}
+.add-icon:hover i:last-child{
+  color: rgba(255,255,255,.5);
+}
+.add-icon:hover i:last-child, .delete-icon:hover i:last-child{
+  display: block;
+}
+.add-icon:hover i:first-child, .delete-icon:hover i:first-child{
+  display: none;
+}
+.add-icon i:last-child, .delete-icon i:last-child{
+  display: none;
+}
+.check-icon i{
+  color: rgba(255,255,255,.6);
+}
+.check-icon i:hover{
+  color: rgba(255,255,255,1);
+}
+.delete-icon i:last-child{
+  color: rgba(255,255,255,.6);
+}
+.latest-todo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.latest-todo span{
+  display: inline-block;
+}
+.latest-todo-text{
+  font-size: 2.3rem;
+  padding: 0 1rem 0 1.5rem;
+  cursor: pointer;
+  padding: 0 1rem;
+  color: rgba(255,255,255,.6);
+  font-size: .9rem;
+}
+.add-icon, .check-icon, .delete-icon{
+  opacity: 0;
+}
+.todo-focus-after:hover .add-icon, .latest-todo:hover .check-icon, .latest-todo:hover .delete-icon{
+  opacity: 1;
+}
+.add-icon{
+  margin-right: -2rem;
+}
 
 /* todolist  */
+.todolist-sec {
+  position: relative;
+}
+.icon-th-list-1 {
+  position: absolute;
+  bottom: 1rem;
+  right: 0;
+  font-size: 1.4rem;
+}
 .todolist-box{
   font-size: 1rem;
   width: 350px;
@@ -10,7 +104,6 @@
   bottom: 3rem;
   right: 0;
   padding: 1rem;
-  display: none;
 }
 .todolist-menu{
   display: flex;
