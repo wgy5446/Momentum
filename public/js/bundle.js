@@ -10294,7 +10294,9 @@ var fadeOut = function fadeOut(target, duration) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _animation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./animation */ "./src/js/animation.js");
 /* harmony import */ var _weather__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./weather */ "./src/js/weather.js");
+/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./todo */ "./src/js/todo.js");
 // src/js/main.js
+
 
  // 로그인페이지에서 사인업 페이지로 넘어가는 애니메이션
 
@@ -10369,7 +10371,165 @@ var $wBox = document.querySelector('.weather-box');
 
 $wMain.onclick = function () {
   $wBox.style.display === 'block' ? Object(_weather__WEBPACK_IMPORTED_MODULE_1__["closeWeatherBox"])($wBox) : Object(_weather__WEBPACK_IMPORTED_MODULE_1__["openWeatherBox"])($wBox);
-}; // weather end
+};
+
+Object(_weather__WEBPACK_IMPORTED_MODULE_1__["weatherInit"])(); // weather end
+// todo start
+
+var $checkbox = document.querySelector('.icon-check-empty');
+var $iconCancel = document.querySelector('.icon-cancel');
+var $todolistBody = document.querySelector('.todolist-body');
+var $todolistMenu = document.querySelector('.todolist-menu');
+var $iconList = document.querySelector('.icon-th-list-1');
+var $todolistBox = document.querySelector('.todolist-box');
+Object(_todo__WEBPACK_IMPORTED_MODULE_2__["render"])();
+window.onload = _todo__WEBPACK_IMPORTED_MODULE_2__["getTodo"];
+
+$todolistMenu.onclick = function (_ref2) {
+  var target = _ref2.target;
+  if (!target.matches('.todolist-menu > li')) return;
+  Object(_todo__WEBPACK_IMPORTED_MODULE_2__["changeList"])(target.id);
+};
+
+var toggleIcon = function toggleIcon(_ref3) {
+  var target = _ref3.target;
+  if (!target.matches('.icon-th-list-1')) return;
+  if ($todolistBox.style.display === 'none') $todolistBox.style.display = 'block';else $todolistBox.style.display = 'none';
+};
+
+$iconList.onclick = toggleIcon;
+
+/***/ }),
+
+/***/ "./src/js/todo.js":
+/*!************************!*\
+  !*** ./src/js/todo.js ***!
+  \************************/
+/*! exports provided: render, getTodo, addTodo, removeTodo, toggleCompleted, changeList */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTodo", function() { return getTodo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addTodo", function() { return addTodo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeTodo", function() { return removeTodo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleCompleted", function() { return toggleCompleted; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changeList", function() { return changeList; });
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// state
+var todos = [];
+var todoState = 'all';
+var $todolistBody = document.querySelector('.todolist-body');
+var $todolistMenu = document.querySelector('.todolist-menu');
+
+var render = function render() {
+  var _todos = todos.filter(function (_ref) {
+    var completed = _ref.completed;
+    return todoState === 'all' ? true : todoState === 'active' ? !completed : completed;
+  });
+
+  var html = '';
+
+  _todos.forEach(function (_ref2) {
+    var id = _ref2.id,
+        content = _ref2.content,
+        completed = _ref2.completed;
+    html += "<li id=\"".concat(id, "\">\n    <label for=\"added-").concat(id, "\">\n      <i class=\"icon-check-empty\"></i>\n      <input type=\"checkbox\" id=\"added-").concat(id, "\" ").concat(completed ? 'checked' : '', ">\n      <span class=\"added-todo-text\">").concat(content, "</span>\n      <i class=\"icon-cancel\"></i>\n    </label>\n  </li>");
+  });
+
+  $todolistBody.innerHTML = html;
+};
+
+var getTodo = function getTodo() {
+  fetch('/todos', {
+    method: 'GET'
+  }).then(function (res) {
+    return res.json();
+  }).then(function (_todo) {
+    todos = _todo;
+  })["catch"](new Error('Error')).then(render);
+};
+
+var addTodo = function addTodo(content) {
+  fetch('/todos', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      id: generateId(),
+      content: content,
+      completed: false
+    })
+  }).then(function (res) {
+    return res.json();
+  }).then(function (_todo) {
+    todos = _todo;
+  })["catch"](new Error('Error')).then(render);
+};
+
+var toggleCompleted = function toggleCompleted() {
+  var completed = todos.map(function (todo) {
+    return todo.id === +id ? _objectSpread({}, todo, {
+      completed: false
+    }) : todo;
+  });
+  fetch('/todos/completed', {
+    method: 'PATCH',
+    Headers: {
+      'content-type': 'application.json'
+    },
+    body: JSON.stringify({
+      completed: completed
+    })
+  }).then(function (res) {
+    return res.json();
+  }).then(function (_todo) {
+    return todos = _todo;
+  }).then(render);
+};
+
+var removeTodo = function removeTodo() {
+  var id = e.target.id;
+  fetch("/todos/".concat(id), {
+    method: 'DELETE'
+  }).then(function (res) {
+    return res.json();
+  }).then(function (_todo) {
+    return todos = _todo;
+  }).then(render);
+}; // const generateId = () => {
+//   return todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1;
+// }
+
+
+var changeList = function changeList(id) {
+  _toConsumableArray($todolistMenu.children).forEach(function ($todoList) {
+    $todoList.classList.toggle('active', $todoList.id === id);
+  });
+
+  todoState = id;
+};
+
+
 
 /***/ }),
 
@@ -10377,56 +10537,114 @@ $wMain.onclick = function () {
 /*!***************************!*\
   !*** ./src/js/weather.js ***!
   \***************************/
-/*! exports provided: openWeatherBox, closeWeatherBox */
+/*! exports provided: openWeatherBox, closeWeatherBox, weatherInit */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openWeatherBox", function() { return openWeatherBox; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "closeWeatherBox", function() { return closeWeatherBox; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "weatherInit", function() { return weatherInit; });
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+// DOMs
+var $weatherMain = document.querySelector('.weather-main');
+var $boxTop = document.querySelector('.box-top');
+var $weeklyTemp = document.querySelector('.weekly-temp');
+var $weeklyIcon = document.querySelector('.weekly-i'); // toggle weather box
+
 var openWeatherBox = function openWeatherBox(weatherbox) {
   weatherbox.style.display = 'block';
 };
 
 var closeWeatherBox = function closeWeatherBox(weatherbox) {
   weatherbox.style.display = 'none';
-};
+}; // Weather API
+
 
 var API_KEY = 'bbcad54aeb4d627c3798f0773d883830';
 
-var currentRender = function currentRender(res) {
-  var temperature = res.main.temp;
-  console.log('current', temperature);
-}; // const weeklyRender = res => {
-//   const temperature = res.current.temp;
-//   console.log('weekly', temperature);
-// };
-// const randomBg = () => { console.log('random bg'); };
+var weatherRender = function weatherRender(res) {
+  var _res$timezone$split = res.timezone.split('/'),
+      _res$timezone$split2 = _slicedToArray(_res$timezone$split, 2),
+      continent = _res$timezone$split2[0],
+      city = _res$timezone$split2[1];
+
+  var temperature = Math.floor(res.current.temp);
+
+  var _res$current$weather = _slicedToArray(res.current.weather, 1),
+      _res$current$weather$ = _res$current$weather[0],
+      currentId = _res$current$weather$.id,
+      description = _res$current$weather$.description;
+
+  var weeklyId = res.daily.map(function (day) {
+    return day.weather.reduce(function (acc, dayW) {
+      return acc + dayW.id;
+    }, 0);
+  });
+  var weeklyTemp = res.daily.map(function (day) {
+    return [Math.floor(day.temp.min), Math.floor(day.temp.max)];
+  });
+  var dayName = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+  var currentIcon = '';
+  if (currentId >= 200 && currentId < 300) currentIcon = 'icon-clouds';
+  if (currentId >= 300 && currentId < 400) currentIcon = 'icon-cloud-sun';
+  if (currentId >= 500 && currentId < 700) currentIcon = 'icon-rain';
+  if (currentId >= 700 && currentId < 800) currentIcon = 'icon-clouds';
+  if (currentId === 800) currentIcon = 'icon-sun';
+  if (currentId > 800) currentIcon = 'icon-cloud-sun';
+  $weatherMain.innerHTML = "\n    <i class=\"".concat(currentIcon, " main-i main-i-id\"></i>\n    <span class=\"main-temp\">").concat(temperature, "</span>\n    <i class=\"icon- main-celccelciusius\"></i>\n    <div class=\"main-location\">").concat(city, ", ").concat(continent, "</div>\n  ");
+  $boxTop.innerHTML = "\n    <div class=\"box-location\">".concat(city, ", ").concat(continent, "</div>\n    <div class=\"box-state box-state-id\">").concat(description, "</div>\n    <i class=\"").concat(currentIcon, " box-i box-i-id\"></i>\n    <span class=\"box-temp\">").concat(temperature, "</span>\n    <i class=\"icon-celcius box-celcius\"></i>\n  ");
+  var $weeklyDay = document.querySelector('.weekly-day');
+  dayName.forEach(function (_, i, arr) {
+    var today = new Date();
+    $weeklyDay.innerHTML += "<span class=\"day-id\">".concat(arr[(today.getDay() + i) % 7], "</span>");
+  });
+  var weeklyIcon = '';
+  weeklyId.forEach(function (dailyId) {
+    if (dailyId >= 200 && dailyId < 300) weeklyIcon = 'icon-clouds';
+    if (dailyId >= 300 && dailyId < 400) weeklyIcon = 'icon-cloud-sun';
+    if (dailyId >= 500 && dailyId < 700) weeklyIcon = 'icon-rain';
+    if (dailyId >= 700 && dailyId < 800) weeklyIcon = 'icon-clouds';
+    if (dailyId === 800) weeklyIcon = 'icon-sun';
+    if (dailyId > 800) weeklyIcon = 'icon-clouds';
+    $weeklyIcon.innerHTML += "<i class=\"".concat(weeklyIcon, " i-id\"></i>");
+  });
+  weeklyTemp.forEach(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        min = _ref2[0],
+        max = _ref2[1];
+
+    $weeklyTemp.innerHTML += "\n      <div class=\"weelky-temp-id\">\n        <span class=\"weekly-max-id\">".concat(max, "</span>\n        <span class=\"weekly-min-id\">").concat(min, "</span>\n      </div>\n    ");
+  });
+  $weeklyIcon.removeChild($weeklyIcon.lastElementChild);
+  $weeklyTemp.removeChild($weeklyTemp.lastElementChild);
+}; // Get weather Object
 
 
-var getCurrentWeather = function getCurrentWeather(lat, lng) {
-  fetch("https://api.openweathermap.org/data/2.5/weather?lat=".concat(lat, "&lon=").concat(lng, "&appid=").concat(API_KEY, "$units=metric")).then(function (res) {
+var getWeather = function getWeather(lat, lng) {
+  fetch("https://api.openweathermap.org/data/2.5/onecall?lat=".concat(lat, "&lon=").concat(lng, "&appid=").concat(API_KEY, "&units=metric")).then(function (res) {
     return res.json();
   }).then(function (res) {
-    console.log('[current]', res);
-    currentRender(res);
+    return weatherRender(res);
   });
-}; // const getWeeklyWeather = (lat, lng) => {
-//   fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`)
-//     .then(res => res.json())
-//     .then(res => {
-//       console.log('[weekly]', res);
-//       weeklyRender(res);
-//     });
-// };
-// Coords
+}; // Get Coordinate
 
 
 var succesLocation = function succesLocation(position) {
   var latitude = position.coords.latitude;
   var longitude = position.coords.longitude;
-  console.log('[coords]', latitude, longitude);
-  getCurrentWeather(latitude, longitude); // getWeeklyWeather(latitude, longitude);
+  getWeather(latitude, longitude);
 };
 
 var errorLocation = function errorLocation() {
@@ -10441,7 +10659,6 @@ var weatherInit = function weatherInit() {
   getLocation();
 };
 
-weatherInit();
 
 
 /***/ }),

@@ -1,6 +1,8 @@
 // src/js/main.js
 import { fadeIn, fadeOut } from './animation';
-import { openWeatherBox, closeWeatherBox } from './weather';
+import { openWeatherBox, closeWeatherBox, weatherInit } from './weather';
+import { render, getTodo, changeList, removeTodo } from './todo';
+
 
 // 로그인페이지에서 사인업 페이지로 넘어가는 애니메이션
 const $loginSignUp = document.querySelector('.login-signup-text');
@@ -67,4 +69,31 @@ $wMain.onclick = () => {
   $wBox.style.display === 'block' ? closeWeatherBox($wBox) : openWeatherBox($wBox);
 };
 
+weatherInit();
 // weather end
+
+// todo start
+const $checkbox = document.querySelector('.icon-check-empty')
+const $iconCancel = document.querySelector('.icon-cancel');
+const $todolistBody = document.querySelector('.todolist-body');
+const $todolistMenu = document.querySelector('.todolist-menu');
+const $iconList = document.querySelector('.icon-th-list-1');
+const $todolistBox = document.querySelector('.todolist-box');
+
+render();
+
+window.onload = getTodo;
+
+$todolistMenu.onclick = ({target}) => {
+  if (!target.matches('.todolist-menu > li')) return;
+  changeList(target.id);
+};
+
+const toggleIcon = ({target}) => {
+  if (!target.matches('.icon-th-list-1')) return;
+  if ($todolistBox.style.display === 'none') $todolistBox.style.display = 'block';
+  else $todolistBox.style.display = 'none';
+}
+
+
+$iconList.onclick = toggleIcon;
