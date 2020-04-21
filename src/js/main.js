@@ -1,5 +1,7 @@
 // src/js/main.js
 import { fadeIn, fadeOut } from './animation';
+import { openWeatherBox, closeWeatherBox } from './weather';
+
 // 로그인페이지에서 사인업 페이지로 넘어가는 애니메이션
 const $loginSignUp = document.querySelector('.login-signup-text');
 const $loginPage = document.querySelector('#login');
@@ -56,3 +58,13 @@ $signupBackBtn.onclick = () => {
     fadeIn($loginPage, 700);
   }, 700);
 };
+
+// weather start
+const $wMain = document.querySelector('.weather-main');
+const $wBox = document.querySelector('.weather-box');
+
+$wMain.onclick = () => {
+  $wBox.style.display === 'block' ? closeWeatherBox($wBox) : openWeatherBox($wBox);
+};
+
+// weather end
