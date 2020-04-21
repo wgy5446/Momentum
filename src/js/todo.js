@@ -1,37 +1,81 @@
 // state
 
 let todos = [];
+let todoState = 'all';
 
-// DOM
-const $todolist = document.querySelector('.todo-list');
-const $inputTodo = document.querySelector('.input-todo');
+const $todolistBody = document.querySelector('.todolist-body');
+const $todolistMenu = document.querySelector('.todolist-menu');
 
 const render = () => {
+  const _todos = todos.filter(({completed}) => (todoState === 'all' ? true : todoState === 'active' ? !completed : completed));
   let html = '';
-  todos.forEach(({id, content, completed}) => {
-    html += `<li id="${id}" class="todo-item">
-    <input id="ck-${id}" class="checkbox" type="checkbox" ${completed ? 'checked' : ''}>
-    <label for="ck-${id}" class="todo-content">${content}</label>
-    <div class="btn-todo">
-      <i class="icon-cancel"></i><i class="icon-cancel-circled"></i>
-    </div>
+  _todos.forEach(({ id, content, completed }) => {
+    html += `<li id="${id}">
+    <label for="added-${id}">
+      <i class="icon-check-empty"></i>
+      <input type="checkbox" id="added-${id}" ${completed ? 'checked' : ''}>
+      <span class="added-todo-text">${content}</span>
+      <i class="icon-cancel"></i>
+    </label>
   </li>`
   });
-  $todolist.innerHTML = html;
+  $todolistBody.innerHTML = html;
 };
 
 const getTodo = () => {
   fetch('/todos', {
     method: 'GET'
   })
-  .then(_todo => todos = _todo)
-  .catch(new Error('Error'))
-  .then(render)
+    .then(res => res.json())
+    .then(_todo => {todos = _todo; })
+    .catch(new Error('Error'))
+    .then(render);
 };
 
-window.onload = getTodo;
+const addTodo = content => {
+  fetch('/todos', {
+    method: 'POST',
+    headers: {'content-type' : 'application/json'},
+    body: JSON.stringify({id: generateId(), content, completed: false})
+  })
+    .then(res => res.json())
+    .then(_todo => { todos = _todo; })
+    .catch(new Error('Error'))
+    .then(render);
+};
 
-$inputTodo.onkeyup = ({keyCode, target}) => {
-  const content = target.value.trim();
-  if (keyCode !== 13 || content = '') return;
+const toggleCompleted = () => {
+  const completed = todos.map(todo => (todo.id === +id ? {...todo, completed: false} : todo))
+  fetch('/todos/completed', {
+    method:'PATCH',
+    Headers: {'content-type' : 'application.json'},
+    body: JSON.stringify({completed})
+  })
+    .then(res => res.json())
+    .then(_todo => todos = _todo)
+    .then(render)
 }
+
+const removeTodo = () => {
+ const id = e.target.id
+  fetch(`/todos/${id}`, {
+    method: 'DELETE'
+  })
+    .then(res => res.json())
+    .then(_todo => todos = _todo )
+    .then(render)
+};
+
+// const generateId = () => {
+//   return todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1;
+// }
+
+const changeList = (id) => {
+  [...$todolistMenu.children].forEach($todoList => {
+    $todoList.classList.toggle('active', $todoList.id === id)
+  })
+ todoState = id;
+};
+
+
+export { render, getTodo, addTodo, removeTodo, toggleCompleted, changeList };

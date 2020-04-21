@@ -1,265 +1,72 @@
-/* Todo */
-.focus-wr {
+
+/* todolist  */
+.todolist-box{
+  font-size: 1rem;
+  width: 350px;
+  min-width: 250px;
+  background:rgba(0,0,0,0.7);
+  border-radius: 5px;
+  position: absolute;
+  bottom: 3rem;
+  right: 0;
+  padding: 1rem;
+  display: none;
+}
+.todolist-menu{
   display: flex;
-  justify-content: center;
-  min-height: 9.3rem;
+  padding-bottom: 1rem;
 }
-.focus-wr .todo-focus {
-  padding-bottom: 0.6rem;
+.todolist-menu li{
+  cursor: pointer;
+  padding: 0 1rem;
+  color: rgba(255,255,255,.6);
+  font-size: .9rem;
 }
-.todo-focus {
-  position: relative;
+.todolist-menu li:first-child{
+  padding: 0 1rem 0 0;
 }
-.focus-wr .todo-focus h3 {
-  display: block;
-  text-align: center;
-  padding-bottom: 0.2rem;
-  font-size: 2.5rem;
+.todolist-menu li:last-child{
+  padding: 0 0 0 1rem;
 }
-.input-todo {
-  display: block;
-  padding-top: 0.4rem;
-  background: 0;
-  width: 30rem;
-  height: 3rem;
-  outline: 0;
-  border: 0;
-  border-bottom: 0.2rem solid #fff;
-  font-size: xx-large;
-  text-align: center;
-  font-weight: 500;
-  transition: border-color .2s ease;
+.todolist-menu li.active{
   color: #fff;
 }
-.todo-rapping {
-  text-align: center;
-}
-.todo {
-  margin: 1.7rem 0 0.3rem;
-  font-size: 7rem;
-  line-height: 3rem;
-  text-transform: uppercase;
-  text-align: center;
-  position: relative;
-  font-size: 1.5rem;
-}
-.todo .icon-plus-circled {
-  display: none;
-}
-.todo .icon-plus, .icon-plus-circled {
-  position: absolute;
-  top: 0;
-  padding-left: 0.5rem;
-  cursor: pointer;
-}
-.todo > .icon-plus:hover + .icon-plus-circled {
- display: inline-block;
- color: #181818;
-}
-.todo-heading {
-  display: block;
-  text-align: center;
-  min-height: 181px;
-  max-height: 181px;
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  opacity: 1;
-}
-/* 체크박스 */
-.checkbox {
-  display: none;
-}
-.checkbox + label {
-  position: relative;
-  top: 0;
-  left: -9px;
-  display: inline-block;
-  width: 100%;
-  padding-left: 1.9rem;
-  cursor: pointer;
-  user-select: none;
-}
-.checkbox + label:before {
-  content: "\f096";
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: none;
-}
-.checkbox:checked + label:after {
-  content: "\e800";
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: none;
-}
-.todo-daily:hover > label:before {
-  display: inline;
-}
-.todo-daily:hover > label:after {
-  display: inline;
-}
-.todo-item:hover > label:before {
-  display: inline;
-}
-.todo-item:hover > label:after {
-  display: inline;
-}
-/* todo-content */
-.todo-heading > .todo-daily > .todo-content {
- display: inline-block;
-}
-/* 취소 버튼 */
-.todo-heading > .todo-daily > .btn-todo {
-  display: none;
-  position: absolute;
-  cursor: pointer;
-}
-.todo-heading > .todo-daily >.btn-todo > .icon-cancel, .icon-cancel-circled {
-  position: absolute;
-  top: 0;
-}
-.todo-daily {
-  width: auto;
-  display: inline-block;
-  visibility: visible;
-  opacity: 1;
-  font-size: 1.9rem;
-}
-.icon-cancel-circled {
-  display: none;
-}
-.todo-daily:hover > .btn-todo{
-  display: inline-block;
-}
-.todo-daily:hover > .btn-todo:hover > .icon-cancel-circled {
-  display: inline-block;
-  color: #181818;
-}
-.todo-daily:hover > .icon-check{
-  display: inline-block;
-}
-/* todolist  */
-.todolist-sec {
-  position: relative;
-}
-.todolist-sec > .icon-th-list-1 {
-  position: absolute;
-  right: 0;
-}
-.todolist-menu {
-  position: absolute;
-  top: -15.7rem;
-  padding: 0.1rem;
-  display: block;
-  width: 100%;
-  height: auto;
-  overflow-x: hidden;
+.todolist-body{
+  height: 300px;
   overflow-y: scroll;
-  opacity: 1;
-  background-color: #181818;
-  border: 1px solid #181818;
-  border-radius: 10px;
-  text-align: left;
 }
-/* width */
-.todolist-menu::-webkit-scrollbar {
-  width: auto;
+.todolist-body li{
+  line-height: 2rem;
 }
-/* Track */
-.todolist-menu::-webkit-scrollbar-track {
-  background: 0;
-}
-/* Handle */
-.todolist-menu::-webkit-scrollbar-thumb {
-  background: #888; 
-  border-radius: 10px;
-}
-/* Handle on hover */
-.todolist-menu::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
-.todo-header {
-  display: block;
-  height: 3rem;
-  position: relative;
-  z-index: 2;
-  cursor: pointer;
-  margin-bottom: 1.5rem;
-}
-.todo-header .todo-list-nav {
-  font-size: 1.5rem;
-  font-weight: 500;
-}
-.todo-list-nav {
+.todolist-body li label{
   display: flex;
-  position: absolute;
-  top: 0;
-  box-shadow: 0 2px 2px rgba(0,0,0,.15);
-  padding: 1rem 0;
-  z-index: 11;
-}
-.todo-list-nav > li {
-  background-color: #181818;
-  width: 100%;
-  /* width: 240px; */
-  padding: 0.4rem 1rem ;
-  font-size: 1.5rem;
-  text-align: left;
-  line-height: normal;
-  white-space: nowrap;
-}
-.todo-list-section {
-  min-height: 11rem;
-  max-height: 11rem;
-  height: 100%;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-}
-.todo-list-nav > li.active {
-  background-color: #333;
-}
-.todo-list {
-  display: inline-block;
-  text-align: left;
-  min-height: 10.0rem;
-  max-height: 10.0rem;
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  opacity: 1;
-}
-.todo-list > li > .todo-content {
-  display: inline-block;
-}
-.todo-list > li > .btn-todo {
-  display: none;
-  position: absolute;
-  left: 81px;
+  justify-content: left;
+  align-items: cetner;
   cursor: pointer;
 }
-.todo-list > li > .btn-todo > .icon-cancel, .icon-cancel-circled {
-  position: absolute;
-  top: 0;
+.todolist-body li input{
+  display: none;
 }
-.todo-item {
-  width: auto;
-  display: block;
-  visibility: visible;
-  opacity: 1;
-  font-size: 1rem;
-  margin-left: 10px;
+label i:first-child{
+  padding-right: .5rem;
 }
-.todo-item:hover > .btn-todo{
-  display: inline-block;
+label i:last-child{
+  padding-left: .5rem;
 }
-.todo-item:hover > .btn-todo:hover > .icon-cancel-circled {
-  display: inline-block;
-  color: #181818;
+.added-todo-text{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 14rem;
 }
-.todo-item:hover > .icon-check{
-  display: inline-block;
+.todolist-body::-webkit-scrollbar {
+  width: 10px;
+}
+.todolist-body::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 20px;
+}
+.todolist-body::-webkit-scrollbar-track {
+  background: #ddd;
+  border-radius: 20px;
 }

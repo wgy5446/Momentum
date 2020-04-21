@@ -10294,7 +10294,9 @@ var fadeOut = function fadeOut(target, duration) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _animation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./animation */ "./src/js/animation.js");
 /* harmony import */ var _weather__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./weather */ "./src/js/weather.js");
+/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./todo */ "./src/js/todo.js");
 // src/js/main.js
+
 
  // 로그인페이지에서 사인업 페이지로 넘어가는 애니메이션
 
@@ -10372,6 +10374,162 @@ $wMain.onclick = function () {
 };
 
 Object(_weather__WEBPACK_IMPORTED_MODULE_1__["weatherInit"])(); // weather end
+// todo start
+
+var $checkbox = document.querySelector('.icon-check-empty');
+var $iconCancel = document.querySelector('.icon-cancel');
+var $todolistBody = document.querySelector('.todolist-body');
+var $todolistMenu = document.querySelector('.todolist-menu');
+var $iconList = document.querySelector('.icon-th-list-1');
+var $todolistBox = document.querySelector('.todolist-box');
+Object(_todo__WEBPACK_IMPORTED_MODULE_2__["render"])();
+window.onload = _todo__WEBPACK_IMPORTED_MODULE_2__["getTodo"];
+
+$todolistMenu.onclick = function (_ref2) {
+  var target = _ref2.target;
+  if (!target.matches('.todolist-menu > li')) return;
+  Object(_todo__WEBPACK_IMPORTED_MODULE_2__["changeList"])(target.id);
+};
+
+var toggleIcon = function toggleIcon(_ref3) {
+  var target = _ref3.target;
+  if (!target.matches('.icon-th-list-1')) return;
+  if ($todolistBox.style.display === 'none') $todolistBox.style.display = 'block';else $todolistBox.style.display = 'none';
+};
+
+$iconList.onclick = toggleIcon;
+
+/***/ }),
+
+/***/ "./src/js/todo.js":
+/*!************************!*\
+  !*** ./src/js/todo.js ***!
+  \************************/
+/*! exports provided: render, getTodo, addTodo, removeTodo, toggleCompleted, changeList */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTodo", function() { return getTodo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addTodo", function() { return addTodo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeTodo", function() { return removeTodo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleCompleted", function() { return toggleCompleted; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changeList", function() { return changeList; });
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// state
+var todos = [];
+var todoState = 'all';
+var $todolistBody = document.querySelector('.todolist-body');
+var $todolistMenu = document.querySelector('.todolist-menu');
+
+var render = function render() {
+  var _todos = todos.filter(function (_ref) {
+    var completed = _ref.completed;
+    return todoState === 'all' ? true : todoState === 'active' ? !completed : completed;
+  });
+
+  var html = '';
+
+  _todos.forEach(function (_ref2) {
+    var id = _ref2.id,
+        content = _ref2.content,
+        completed = _ref2.completed;
+    html += "<li id=\"".concat(id, "\">\n    <label for=\"added-").concat(id, "\">\n      <i class=\"icon-check-empty\"></i>\n      <input type=\"checkbox\" id=\"added-").concat(id, "\" ").concat(completed ? 'checked' : '', ">\n      <span class=\"added-todo-text\">").concat(content, "</span>\n      <i class=\"icon-cancel\"></i>\n    </label>\n  </li>");
+  });
+
+  $todolistBody.innerHTML = html;
+};
+
+var getTodo = function getTodo() {
+  fetch('/todos', {
+    method: 'GET'
+  }).then(function (res) {
+    return res.json();
+  }).then(function (_todo) {
+    todos = _todo;
+  })["catch"](new Error('Error')).then(render);
+};
+
+var addTodo = function addTodo(content) {
+  fetch('/todos', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      id: generateId(),
+      content: content,
+      completed: false
+    })
+  }).then(function (res) {
+    return res.json();
+  }).then(function (_todo) {
+    todos = _todo;
+  })["catch"](new Error('Error')).then(render);
+};
+
+var toggleCompleted = function toggleCompleted() {
+  var completed = todos.map(function (todo) {
+    return todo.id === +id ? _objectSpread({}, todo, {
+      completed: false
+    }) : todo;
+  });
+  fetch('/todos/completed', {
+    method: 'PATCH',
+    Headers: {
+      'content-type': 'application.json'
+    },
+    body: JSON.stringify({
+      completed: completed
+    })
+  }).then(function (res) {
+    return res.json();
+  }).then(function (_todo) {
+    return todos = _todo;
+  }).then(render);
+};
+
+var removeTodo = function removeTodo() {
+  var id = e.target.id;
+  fetch("/todos/".concat(id), {
+    method: 'DELETE'
+  }).then(function (res) {
+    return res.json();
+  }).then(function (_todo) {
+    return todos = _todo;
+  }).then(render);
+}; // const generateId = () => {
+//   return todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1;
+// }
+
+
+var changeList = function changeList(id) {
+  _toConsumableArray($todolistMenu.children).forEach(function ($todoList) {
+    $todoList.classList.toggle('active', $todoList.id === id);
+  });
+
+  todoState = id;
+};
+
+
 
 /***/ }),
 
